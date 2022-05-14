@@ -1,0 +1,365 @@
+TITLE: An implementation of harmonic synthesis to demonstrate the mathematical and audial difference between just intonation and equal temperament
+
+PROBLEM DESCRIPTION: ==================================================================================
+
+In mathematical music theory, there are two general tuning systems:
+equal temperament and just intonation. Equal temperament relies on equal intervals between
+octaves using the square root of 2 as an equalizing ratio, while just intonation uses the
+mathematical ratio between intervals for optimal resonance (e.g. a perfect fifth is 3:2, a perfect
+major third is 5:4). I plan to use harmonic synthesis techniques to combine two discrete sinusoidal waveforms
+into a single audio file for both the equal temperament and just intonation models, while also
+printing some values of the sine wave to mathematically demonstrate the difference. 
+
+PROGRAM DOCUMENTATION: ==================================================================================
+
+The program prompts will appear in the console. Once information is inputted, 
+the user will have to navigate to the program directory and find the .wav files.
+From there, listening to Equal_Temperament.wav, Just_Intonation.wav, and Both_Styles.wav
+will demonstrate the audial difference. 
+
+For extension, the layout is pretty intuitive. A general Wave sets precedents
+for SineWaves and SynthWaves. SineWaves create a characteristic tone, and 
+then store that tone in a dynamically allocated array. On the other hand, 
+SynthWaves are conglomerations of SineWaves, so they need less class information.
+
+Admittedly, SynthWaves can't combine other SynthWaves, but that could be easily remedied 
+through a polymorphism pointer. But, within this context, that's not needed.
+
+Regarding new features, there a few a areas that could be enhanced: 
+    1. A UI would make this more intuitive (obviously).
+    2. Playback within the program would also help, but that's an  
+        OS-specific problem that would be a hassle to implement now. 
+    3. Changing the bit depth and sample rate would be a nice improvement, 
+        but one with "interesting" side effects. Since the grader may not 
+        be an audiophile, messing with these parameters would not be very
+        impactful on the user's end. 
+    4. Allowing for different modalities and inversions would also be nice. This is pretty easily done, 
+        but didn't make sense in a Computer Science-specific context. 
+    
+
+
+DATA STRUCTURE: ==================================================================================
+
+I used vectors and dynamically allocated arrays. Each Wave has its own dynamically allocated 
+array to store its harmonic values generated at runtime. 
+
+These arrays were repeatedly accessed, making their constant access time a boon for the program. 
+Since they were only allocated once, their linear resize time wasn't an issue. 
+
+TESTS: ==================================================================================
+
+======== Case 1 (base case) ========
+
+How many steps above or below A would you like to go?
+(Add or substract 12 to value to make it an octave higher or lower)
+** WARNING: going too high (greater than 15) or too low (less than -15) will make it difficult to hear **
+
+0: A
+1: A#/Bb
+2: B
+3: C
+4: C#/Db
+5: D
+6: D#/Eb
+7: E
+8: F
+9: F#/Gb
+10: G
+11: G#/Ab
+
+Choice: 0
+
+--------------------------------
+
+How long would you like the example to be?
+** WARNING: Please be reasonable in length, not more than 20 seconds **
+
+Choice: 5
+
+--------------------------------
+
+What would you like the amplitude to be?
+** WARNING: Amplitude scales rapidly, not more than 1 **
+(0.5 is recommended)
+
+Choice: 0.5
+
+--------------------------------
+For a numerical reference, here's first 10 values each wave.
+441000 different values are generated each second, so these small differences manifest large changes.
+
+Notice how the fifths are relatively close, but the thirds vary quite widely
+
+Root note: (A is 440 Hz) 
+0 0.031324 0.062525 0.093481 0.124069 0.154170 0.183665 0.212438 0.240377 0.267372 
+
+Third in Equal Temperament: (C#/Db is 550.000000 Hz) 
+0.000000 0.039141 0.078041 0.116463 0.154170 0.190930 0.226519 0.260718 0.293316 0.324114 
+
+Third in Just Intonation: (C#/Db is 554.365234 Hz) 
+0.000000 0.039451 0.078656 0.117370 0.155353 0.192366 0.228181 0.262573 0.295327 0.326240 
+
+Fifth in Equal Temperament: (E is 660.000000 Hz) 
+0.000000 0.046948 0.093481 0.139188 0.183665 0.226519 0.267372 0.305862 0.341650 0.374419 
+
+Fifth in Just Intonation: (E is 659.255127 Hz) 
+0.000000 0.046895 0.093376 0.139035 0.183467 0.226283 0.267103 0.305568 0.341340 0.374102 
+
+======== Case 2: ========
+
+How many steps above or below A would you like to go?
+(Add or substract 12 to value to make it an octave higher or lower)
+** WARNING: going too high (greater than 15) or too low (less than -15) will make it difficult to hear **
+
+0: A
+1: A#/Bb
+2: B
+3: C
+4: C#/Db
+5: D
+6: D#/Eb
+7: E
+8: F
+9: F#/Gb
+10: G
+11: G#/Ab
+
+Choice: 25
+
+--------------------------------
+
+How long would you like the example to be?
+** WARNING: Please be reasonable in length, not more than 20 seconds **
+
+Choice: 20
+
+--------------------------------
+
+What would you like the amplitude to be?
+** WARNING: Amplitude scales rapidly, not more than 1 **
+(0.5 is recommended)
+
+Choice: 0.5
+
+--------------------------------
+
+Root note: (A#/Bb is 1864.66 Hz) 
+0 0.131277 0.253343 0.357633 0.436830 0.485376 0.499865 0.479281 0.425069 0.341031 
+
+Third in Equal Temperament: (D is 2330.818848 Hz) 
+0.000000 0.163008 0.308203 0.419721 0.485376 0.497993 0.456194 0.364546 0.233064 0.076115 
+
+Third in Just Intonation: (D is 2349.318115 Hz) 
+0.000000 0.164253 0.310274 0.421857 0.486614 0.497360 0.452900 0.358171 0.223686 0.064372 
+
+Fifth in Equal Temperament: (F is 2796.982666 Hz) 
+0.000000 0.194019 0.357633 0.465201 0.499865 0.456194 0.341031 0.172423 -0.023205 -0.215197 
+
+Fifth in Just Intonation: (F is 2793.825928 Hz) 
+0.000000 0.193812 0.357319 0.464953 0.499885 0.456653 0.342016 0.173900 -0.021408 -0.213369 
+
+======== Case 3: (0 edge case) ========
+======== Flat waves generated, .wav created but has no data (no playback)
+
+How many steps above or below A would you like to go?
+(Add or substract 12 to value to make it an octave higher or lower)
+** WARNING: going too high (greater than 15) or too low (less than -15) will make it difficult to hear **
+
+0: A
+1: A#/Bb
+2: B
+3: C
+4: C#/Db
+5: D
+6: D#/Eb
+7: E
+8: F
+9: F#/Gb
+10: G
+11: G#/Ab
+
+Choice: 0
+
+--------------------------------
+
+How long would you like the example to be?
+** WARNING: Please be reasonable in length, not more than 20 seconds **
+
+Choice: 0
+
+--------------------------------
+
+What would you like the amplitude to be?
+** WARNING: Amplitude scales rapidly, not more than 1 **
+(0.5 is recommended)
+
+Choice: 0
+
+--------------------------------
+
+Root note: (A is 440 Hz) 
+0 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 
+
+Third in Equal Temperament: (C#/Db is 550.000000 Hz) 
+0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 
+
+Third in Just Intonation: (C#/Db is 554.365234 Hz) 
+0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 
+
+Fifth in Equal Temperament: (E is 660.000000 Hz) 
+0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 
+
+Fifth in Just Intonation: (E is 659.255127 Hz) 
+0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 
+
+======== Case 4: (- steps demo) ========
+======== Values < 0 are accepted
+======== Amplitudes > 1 not accepted
+
+How many steps above or below A would you like to go?
+(Add or substract 12 to value to make it an octave higher or lower)
+** WARNING: going too high (greater than 15) or too low (less than -15) will make it difficult to hear **
+
+0: A
+1: A#/Bb
+2: B
+3: C
+4: C#/Db
+5: D
+6: D#/Eb
+7: E
+8: F
+9: F#/Gb
+10: G
+11: G#/Ab
+
+Choice: -10
+
+--------------------------------
+
+How long would you like the example to be?
+** WARNING: Please be reasonable in length, not more than 20 seconds **
+
+Choice: 5
+
+--------------------------------
+
+What would you like the amplitude to be?
+** WARNING: Amplitude scales rapidly, not more than 1 **
+(0.5 is recommended)
+
+Choice: 0.5
+
+--------------------------------
+For a numerical reference, here's first 10 values each wave.
+441000 different values are generated each second, so these small differences manifest large changes.
+
+Notice how the fifths are relatively close, but the thirds vary quite widely
+
+Root note: (B is 246.942 Hz) 
+0 0.017588 0.035154 0.052677 0.070134 0.087505 0.104767 0.121900 0.138882 0.155692 
+
+Third in Equal Temperament: (D#/Eb is 308.677063 Hz) 
+0.000000 0.021982 0.043922 0.065777 0.087505 0.109064 0.130411 0.151507 0.172309 0.192778 
+
+Third in Just Intonation: (D#/Eb is 311.126984 Hz) 
+0.000000 0.022157 0.044270 0.066296 0.088192 0.109915 0.131422 0.152671 0.173619 0.194227 
+
+Fifth in Equal Temperament: (F#/Gb is 370.412476 Hz) 
+0.000000 0.026375 0.052677 0.078832 0.104767 0.130411 0.155692 0.180539 0.204884 0.228657 
+
+Fifth in Just Intonation: (F#/Gb is 369.994415 Hz) 
+0.000000 0.026345 0.052618 0.078744 0.104651 0.130268 0.155522 0.180345 0.204666 0.228419 
+
+
+======== Case 5: (erroneous input edges) ========
+======== Durations > 20 not accepted
+======== Amplitudes > 1 not accepted
+
+How many steps above or below A would you like to go?
+(Add or substract 12 to value to make it an octave higher or lower)
+** WARNING: going too high (greater than 15) or too low (less than -15) will make it difficult to hear **
+
+0: A
+1: A#/Bb
+2: B
+3: C
+4: C#/Db
+5: D
+6: D#/Eb
+7: E
+8: F
+9: F#/Gb
+10: G
+11: G#/Ab
+
+Choice: 0
+
+--------------------------------
+
+How long would you like the example to be?
+** WARNING: Please be reasonable in length, not more than 20 seconds **
+
+Choice: 21
+
+Error encounted. Please enter a valid number.
+
+
+Choice: 100
+
+Error encounted. Please enter a valid number.
+
+
+Choice: 2 
+
+--------------------------------
+
+What would you like the amplitude to be?
+** WARNING: Amplitude scales rapidly, not more than 1 **
+(0.5 is recommended)
+
+Choice: 1.5
+
+Error encounted. Please enter a valid number.
+
+
+Choice: 1.2
+
+Error encounted. Please enter a valid number.
+
+
+Choice: 1.0
+
+--------------------------------
+For a numerical reference, here's first 10 values each wave.
+441000 different values are generated each second, so these small differences manifest large changes.
+
+Notice how the fifths are relatively close, but the thirds vary quite widely
+
+Root note: (A is 440 Hz) 
+0 0.062648 0.125051 0.186961 0.248138 0.308339 0.367330 0.424877 0.480755 0.534744 
+
+Third in Equal Temperament: (C#/Db is 550.000000 Hz) 
+0.000000 0.078282 0.156083 0.232926 0.308339 0.381861 0.453038 0.521435 0.586632 0.648228 
+
+Third in Just Intonation: (C#/Db is 554.365234 Hz) 
+0.000000 0.078902 0.157311 0.234740 0.310705 0.384733 0.456362 0.525145 0.590654 0.652480 
+
+Fifth in Equal Temperament: (E is 660.000000 Hz) 
+0.000000 0.093896 0.186961 0.278375 0.367330 0.453038 0.534744 0.611724 0.683300 0.748838 
+
+Fifth in Just Intonation: (E is 659.255127 Hz) 
+0.000000 0.093790 0.186753 0.278070 0.366935 0.452565 0.534205 0.611136 0.682680 0.748204 
+
+REFLECTIONS: ==================================================================================
+
+Using inheritance and interfaces proved difficult at first, but it eventually became more intuitive.
+By leveraging more sophisticated techniques like inheritance and dynamic allocation, I was
+able to make a fairly robust program with definite extension opportunities. A year ago, I couldn't code at all, 
+so being able to make a program that demonstrates mathematical certainties in music seems 
+pretty cool. 
+
+If I could do this again, I would add a wider-reaching inheritance structure so that I could 
+easily manipulate the user input into a wider variety of outputs. I would also more carefully plan 
+my inheritance structure while also leaving room for composition (the generate() functions could have
+benefitted from composition).

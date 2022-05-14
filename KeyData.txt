@@ -1,0 +1,17 @@
+A
+A#/Bb
+B
+C
+C#/Db
+D
+D#/Eb
+E
+F
+F#/Gb
+G
+G#/Ab
+Root note
+Third in Equal Temperament
+Third in Just Intonation
+Fifth in Equal Temperament
+Fifth in Just Intonation
