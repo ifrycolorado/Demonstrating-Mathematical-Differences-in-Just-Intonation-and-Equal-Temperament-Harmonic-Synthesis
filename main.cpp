@@ -120,8 +120,8 @@ int main() {
 
     // Equal Temperament vector pushes
     ETVector.push_back(&sineRoot);
-    ETVector.push_back(&sineJI3);
-    ETVector.push_back(&sineJI5);
+    ETVector.push_back(&sineET3);
+    ETVector.push_back(&sineET5);
 
     // Both Styles vector pushes
     bothVector.push_back(&sineRoot);
@@ -149,7 +149,7 @@ int main() {
         } cout << endl << endl; 
     }
 
-    // generate the syntehsis waves
+    // generate the synthesis waves
     if (!synthBoth.generate(bothVector)) {
         cout << "Something happened! Quitting now" << endl;
         return 0; 
